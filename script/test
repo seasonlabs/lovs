@@ -1,0 +1,27 @@
+#!/usr/bin/ruby
+
+require 'YAML'
+require 'logger'
+require 'test/unit'
+
+file = (RUBY_VERSION > '1.8.x' ? ARGV[1] : ARGV[0])
+
+if file.nil?
+  puts "Usage: test -- [File]"
+  exit 1
+end
+
+class YamlFileTest < Test::Unit::TestCase
+  def setup
+    file = (RUBY_VERSION > '1.8.x' ? ARGV[1] : ARGV[0])
+    @log = Logger.new(STDOUT)
+    @log.info "Testing file:" + file
+    @yml = YAML::parse(File.open(File.join(File.dirname(__FILE__), '..', file)))
+  end
+  
+  def test_is_yaml
+    #ruby 1.9 and it's wonderful YAML engine decisions
+    type = (RUBY_VERSION > '1.8.x' ? Syck::Map : YAML::Syck::Map)
+    assert_instance_of(type, @yml)
+  end
+end
