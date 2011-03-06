@@ -40,6 +40,6 @@ Testing your files
 
 Use 
 
-  script/test -- [File]
+    script/test -- [File]
 
 to test your files
