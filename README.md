@@ -45,6 +45,6 @@ Use
 to test your files
 
 Tools
-_____
+-----
 
-Check the scripts subdirectory to find several tools to work with the lists.
+Check the scripts folder to find several tools to work with the lists.
