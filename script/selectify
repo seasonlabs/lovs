@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+require 'YAML'
+require 'logger'
+require 'test/unit'
+
+file = ARGV[0]
+
+if file.nil?
+  puts "Usage: selectify [File]"
+  exit 1
+end
+
+yml = YAML::parse(File.open(File.join(File.dirname(__FILE__), '..', file)))
+
+select = "<select>\n\r"
+
+yml.value.each_pair { |key, value|
+  select += "<option value=\"#{key.value}\">#{value.value}</option>\n\r"
+}
+
+select += "</select>"
+
+puts select
